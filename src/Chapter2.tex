@@ -1,0 +1,77 @@
+%! Author = teddy
+%! Date = 18/01/2022
+
+% Preamble
+\documentclass[11pt]{article}
+\title{MTH2004 - Vector Calculus and Applications: Scalar and Vector Fields}
+
+% Packages
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{pgfplots}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+
+\pgfplotsset{compat= newest}
+% Document
+\begin{document}
+    \maketitle
+\section{Definitions}\label{sec:definitions}
+    Many physical quantities have values at every different point in a particular
+    region of space.
+    For example:\\
+    \newline
+    a) The temperature in a room.\\
+    b) Gravitational acceleration.\\
+    c) Velocity of water flow.
+    \\
+    \\
+    The term \textbf{field} is used to mean both the region of space and the value of the physical
+    quantity in that region:\\\\
+    \textbullet \; For a scalar quantity: $\phi(\vec{r}) = \phi(x,y,z)$\\
+    \textbullet \; For a vector quantity: $\vec{F}(\vec{r}) = \vec{F}(x,y,z)$\\
+    \subsection{Level Curves and Level surfaces}\label{subsec:level-curves-and-level-surfaces}
+    The gravitational potential of Earth is a scalar field and near the surface can be approximated as: $\phi(z) = gz$.
+    Where an arbitrary height z = 0 has been chosen as the reference level.
+    The potential field is related to the gravitational potential energy $U$, between a mass $m$ and the Earth
+    as $U = mgz = m\phi$.\\\\
+    Suppose on a hill we draw a curve corresponding to a constant value of $\phi(\vec{r}) = C$.
+    This curve is called a \textbf{level curve} of $\phi$.\\\\
+    These level curves correspond to the contour lines on an ordinance survey map that indicate height.
+    \begin{figure}
+        \begin{center}
+            \label{fig:figure}
+            \includegraphics[scale = 1]{survey_map}
+            \caption{Graph with Contour Lines}
+        \end{center}
+    \end{figure}
+    \textbf{Level surfaces} of a scalar field are surfaces where all points share the same value of the scalar field,
+    $\phi(\vec{r}) = C$.\\
+    \paragraph{Example of Level Curves}\\
+    Consider the function$f(x,y) = x^2 + y^2$, the level curves are $x^2 + y^2 = C$ are centric circles of radius $\sqrt {C}$.
+    \begin{figure}[h]
+        \label{fig:figure2}
+        \begin{center}
+            \includegraphics[scale = .70]{level_curve_eg}
+            \caption{Level Curve example where $C = 16$}
+        \end{center}
+    \end{figure}
+    \paragraph{Example 2: Level Surfaces}
+    For $f(x,y,z) = x^2 + y^2 + z^2$ the level surfaces are $ x^2 + y^2 + z^2 = C$ are are concentric spheres
+    of radius $\sqrt {C}$.
+    \begin{figure}[h]
+        \label{fig:figure3}
+        \begin{center}
+            \includegraphics[scale = .70]{level_surface_eg}
+            \caption{Level Surface example where $C = 16$}
+        \end{center}
+    \end{figure}
+    \subsection{Vector Fields and Field Lines}\label{subsec:vector-fields-and-field-lines}
+    Vector fields in two dimensions can be visualised by drawing the vector at a sequence of points or on a grid,
+    with \textbf{the length and direction of the arrow denoting the magnitude and direction of the vector} respectively.
+    \\
+    A \textbf{field line} is a curve whose tangent is parallel to the vector field at each point along the curve.
+    With respect to fluid dynamics, field lines are known as \textbf{streamlines} and show the direction in which
+    fluid particles travel.\\
+    The \textbf{density of field liens} is an indication of the magnitude of the vector field.\\
+\end{document}
