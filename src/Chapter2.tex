@@ -16,7 +16,7 @@
 % Document
 \begin{document}
     \maketitle
-\section{Definitions}\label{sec:definitions}
+    \section{Definitions}\label{sec:definitions}
     Many physical quantities have values at every different point in a particular
     region of space.
     For example:\\
@@ -28,8 +28,8 @@
     \\
     The term \textbf{field} is used to mean both the region of space and the value of the physical
     quantity in that region:\\\\
-    \textbullet \; For a scalar quantity: $\phi(\vec{r}) = \phi(x,y,z)$\\
-    \textbullet \; For a vector quantity: $\vec{F}(\vec{r}) = \vec{F}(x,y,z)$\\
+    \textbullet \; For a scalar quantity: a \textbf{scalar field} $\phi(\vec{r}) = \phi(x,y,z)$\\
+    \textbullet \; For a vector quantity: a \textbf{vector field} $\vec{F}(\vec{r}) = \vec{F}(x,y,z)$\\
     \subsection{Level Curves and Level surfaces}\label{subsec:level-curves-and-level-surfaces}
     The gravitational potential of Earth is a scalar field and near the surface can be approximated as: $\phi(z) = gz$.
     Where an arbitrary height z = 0 has been chosen as the reference level.
@@ -74,4 +74,135 @@
     With respect to fluid dynamics, field lines are known as \textbf{streamlines} and show the direction in which
     fluid particles travel.\\
     The \textbf{density of field liens} is an indication of the magnitude of the vector field.\\
+
+    \section{Differentiating Scalar Fields}\label{sec:differentiating-scalar-fields}
+    We define the \textbf{gradient} of a scalar field $f(x,y,z)$ as the vector\\:
+    \begin{equation}
+        \label{eq:equation}
+        grad f = \nabla f = (\frac{ \partial f}{\partial x},\: \frac{ \partial f}{\partial y},\: \frac{ \partial f}{\partial z})
+    \end{equation}
+    where $\nabla$ is a differential operator:
+    \begin{equation}
+        grad  = \nabla f = (\frac{ \partial }{\partial x},\: \frac{ \partial }{\partial y},\: \frac{ \partial }{\partial z}\;)
+        = \hat{x} \frac{\partial}{\partial x} + \hat{y} \frac{\partial}{\partial y} + \hat{z} \frac{\partial}{\partial z}
+        \label{eq:equation2}
+    \end{equation}
+    \textbf{NB:} despite $f$ being a scalar field, $\nabla f$ is a vector field!
+    \\
+    \paragraph{$\nabla f$ with respect to level surfaces}
+    The gradient $\nabla f$ is orientated perpendicular to the level surfaces $f(\vec{r}) = C$, in the direction of the steepest ascent,
+    with magnitude equal to the rate of change in that direction.
+    Mathematically:
+    \begin{equation}
+        \label{eq:equation3}
+        | \nabla f | = \frac{df}{ds}
+    \end{equation}
+    Where $s$ is the distance measured along the surface normal vector (parallel to $\nabla f$) $\hat{n}$.
+
+    \paragraph{The properties of the gradient} For any scalar functions of position $f(x,y,z)$ and $g(x,y,z)$ and any constant
+    $c$:
+    \begin{subequations}
+        \begin{align}
+            \nabla (f + g) = \nabla f + \nabla g\\
+            \nabla (cf) = c \nabla f\\
+            \nabla (fg) = f \nabla g + g \nabla f \: \text{[product rule]}\\
+            \nabla f(g) = f'(g) \nabla g  \: \text{[chain rule]}\\
+        \end{align}
+    \end{subequations}
+
+    \subsection{The directional derivative}\label{subsec:the-directional-derivative}
+    Previously we considered the rate of change of a scalar field in the direction normal to its level surfaces.
+    But we may calculate the rate of change in any arbitrary direction.\\
+    Consider a direction, defined as the unit vector $\hat{a}$, and a displacement vector $d\vec{r} = \hat{a} ds$, where
+    $ds$ is the distance along $\vec{a}$.
+    Then:
+    \begin{equation}
+        \label{eq:equation4}
+        df = \nabla f \cdot \hat{a} \; ds \Rightarrow \frac{df}{ds} = \nabla f \cdot \hat{a} = (\hat{a} \cdot \nabla) f
+    \end{equation}
+    This is known as the \textbf{directional derivative} of $f$ in the direction of $\hat{a}$.
+    We can also write it as:
+    \begin{equation}
+        \label{eq:equation5}
+        \frac{df}{ds} = | \nabla f | \cos (\theta)
+    \end{equation}
+    where $\theta$ is the angle between $\nabla f$ and $\hat{a}$.\\
+    \textbf{NB:} Since $-1 \leq \cos \theta \leq 1$:\\
+    \textbullet $f$ increases most rapidly in the direction of $\nabla f$\\
+    \textbullet $f$ decreases most rapidly in the direction of $-\nabla f$
+
+    \subsection{Vector functions}\label{subsec:vector-functions}
+    \subsubsection{Parameterised curves}
+    A curve $C$ in three-dimensional space is an inherently on-dimensional object.
+    The position vector of any point along the curve may be characterised using one parameter:
+    \begin{equation}
+        \label{eq:equation6}
+        \vec{r}(t) = x(t)\hat{x} + y(t)\hat{y} + z(t)\hat{z}
+    \end{equation}
+    \subsubsection{Tangent vector and tangent lines}
+    The derivative of the position vector $\vec{r}(t)$ w.r.t the parameter $t$ is the \textbf{tangent vector}:
+    \begin{equation}
+        \label{eq:equation7}
+        \vec{r'}(t) = \frac{dx}{dt}\hat{x} + \frac{dy}{dt}\hat{y} + \frac{dz}{dt}\hat{z}
+
+    \end{equation}
+    The \textbf{tangent line} to the curve at point P with position vector $\vec{r}(t_0)$ is the line
+    through the point P and parallel with $\vec{r'}(t_0)$:
+    \begin{equation}
+        \label{eq:equation8}
+        \vec{q}(w) = \vec{t_0} + w\vec{r'}(t_0)
+    \end{equation}
+    \subsubsection{Length of a curve}
+    \paragraph{Planar curve}
+    The length L of a curve C given in the form $y= F(x)$, $a \leq x \leq b$ is:
+    \begin{equation}
+        \label{eq:equation9}
+        L = \int_{a}^{b} \sqrt {1 + \left( \frac{dy}{dx}\right)^2} \: dx
+    \end{equation}
+    Suppose that C can be described by the parametric $\vec{r}(t) = x(t)\hat{x} + y(t)\hat{y}$, $t \in [\alpha, \beta]$,
+    where $\frac{dx}{dt} = x'(t) > 0$.
+    This means that C is traversed once, from left to right as $t$ increases from $\alpha$ to $\beta$ and $x(\beta) = b$.\\
+    If $\frac{dx}{dt} = x'(t) \neq 0$, the slope $\frac{dy}{dx}$ of the tangent to the curve can be found via the chain rule:
+    \begin{subequations}
+        \begin{center}
+            \begin{align}
+                \frac{dy}{dt} = \frac{dy}{dx} \cdot \frac{dx}{dt}
+                \Rightarrow \frac{dy}{dx} = \frac{y'(t)}{x'(t)}
+            \end{align}
+        \end{center}
+        If we think of the curve as being traced by a moving particle, then $x'(t)$ and $y'(t)$ are the horizontal
+        and vertical velocities of the particle, respectively, and the expression above says that the slope of the
+        tangent is the ratio of these velocities.\\
+        Using the substitution rule, we obtain:
+        \begin{center}
+            \begin{align}
+                L = \int_{\alpha}^{\beta} \sqrt {1 + \left( \frac{\frac{dy}{dt}}{\frac{dx}{dt}} \right)^2} \frac{dx}{dt}\: dt
+            \end{align}
+        \end{center}
+        since $\frac{dx}{dt} = x'(t) > 0$, we have:
+        \begin{center}
+            \begin{align}
+                L = \int_{\alpha}^{\beta} \sqrt {\left( \frac{dx}{dt} \right)^2 + \left( \frac{dy}{dt} \right)^2}\: dt
+            \end{align}
+        \end{center}
+    \end{subequations}
+    \paragraph{Generalisation}
+    The length of a smooth curve $\vec{r}(t) = x(t)\hat{x} + y(t)\hat{y} + z(t)\hat{z}$ for $a \leq t \leq b$, is:
+    \begin{equation}
+        \label{eq:equation10}
+        \ell = \int_{a}^{b} \left| \frac{d\vec{r}}{dt} \right| dt = \int_{a}^{b} | \vec{r'}(t) | \:dt =
+        \int_{a}^{b} \sqrt {\vec{r'}(t) \cdot \vec{r'}(t)} \:dt
+    \end{equation}
+    If we replace the fixed value $b$ by the parameter $t$, we obtain the arc length as a function of $t$:
+    \begin{equation}
+        \label{eq:equation11}
+        s(t) = \int_{t_0}^{t} |\vec{r'}(\tau)| d\tau
+    \end{equation}
+    which is the directed distance between points $P(\vec{r}(t_0))$ to $P(\vec{r}(t))$ along the curve.\\
+    Further, if we differentiate and square the arc length we obtain:
+    \begin{equation}
+        \label{eq:equation12}
+        (ds)^2 = d\vec{r} \cdot d\vec{r} = (dx)^2 + (dy)^2 + (dz)^2
+    \end{equation}
+    Where $ds$ is called the \textbf{line element} of the curve C .
 \end{document}
