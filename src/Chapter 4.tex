@@ -1,0 +1,31 @@
+%! Author = teddy
+%! Date = 12/02/2022
+
+% Preamble
+\documentclass[11pt]{article}
+\title{Integration of Vectors}
+% Packages
+\usepackage{amsmath}
+
+% Document
+\begin{document}
+\maketitle
+    \section{Evaluation of Line Integrals}\label{sec:evaluation-of-line-integrals}
+        In a line integral, we integrate a given function $f(x,y,z)$ along a curve $C$
+        in space from point $a$ at location $\vec{r(a)}$ to point $b$ at location $\vec{r(b)}$.
+        \\
+        In order to achieve this, we describe the curve $C$ by its parametric representation in Cartesian coordinates:
+        $\vec{r(t)} = (x(t), y(t), z(t))$.
+        The curve $C$ is called the path of integration. $P = \vec{r(a)}$ is its start point $Q = \vec{r(b)}$ is its end point.
+        The curve $C$ is oriented positively in the direction from $P$ to $Q$ and is denoted by an arrow.
+        If the points $P$ and $Q$ coincide the path is \textbf{closed}.
+
+        \subsection{Line integral of vector field}\label{subsec:line-integral-of-vector-field}
+            The line integral of a vector field $\vec{F}$ over a curve $C$ with parametric representation
+            $\vec{r(t)}$ is:
+            \begin{equation}
+                \label{eq:equation}
+                \int_{C} \vec{F}(\vec{r}) \cdot d\vec{r} = \int_{a}^{b} \vec{F}(\vec{r(t)}) \cdot \frac{d\vec{r(t)}}{dt} dt
+            \end{equation}
+            where $d\vec{r}$ is the curve's displacement vector or line element
+\end{document}

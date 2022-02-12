@@ -1,0 +1,342 @@
+%! Author = teddy
+%! Date = 07/02/2022
+
+% Preamble
+\documentclass[11pt]{article}
+\title{Differentiation of Vectors}
+% Packages
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{pgfplots}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+
+\pgfplotsset{compat= newest}
+
+% Document
+\begin{document}
+\maketitle
+
+    \section{Differentiation Rules for Vector Fields}\label{sec:differentiation-rules-for-vector-fields}
+    \subsection{Cartesian coordinates}\label{subsec:cartesian-coordinates}
+        For a vector function or field $\vec{A} = A_x \hat{x} +  A_y \hat{y}+  A_z \hat{z} $.
+        If the vector function depends on one variable, then it is differentiated component wise:
+        \begin{equation}
+            \label{eq:equation}
+            \frac{d\vec{A}}{dt} = \frac{dA_x}{dt}\hat{x} + \frac{dA_y}{dt}\hat{y} + \frac{dA_z}{dt}\hat{z}
+        \end{equation}
+        Vector differentiation is also linear for multiplication and addition.
+        Importantly for differentiation on field operators $\cdot$ and $\times$ is:
+        \begin{subequations}
+            \begin{center}
+                \begin{align}
+                    \frac{d}{dt} (\vec{A} \cdot \vec{B}) = \frac{d\vec{A}}{dt} \cdot \vec{B} + \vec{A} \cdot \frac{d\vec{B}}{dt}\\
+                    \frac{d}{dt} (\vec{A} \times \vec{B}) = \frac{d\vec{A}}{dt} \times \vec{B} + \vec{A} \times \frac{d\vec{B}}{dt}
+                \end{align}
+            \end{center}
+        \end{subequations}
+        \subsubsection{Curvilinear coordinates}
+            Consider cylindrical coordinates $(R,\varphi)$.
+            The polar coordinate base vectors $\hat{R}$ and $\hat{\varphi}$ are constant in magnitude, but
+            they change their directions from point to point, depending on the polar angle $\varphi$.\\
+            \paragraph{Example} Consider the vector components: $\hat{R} = \cos (\varphi) \hat{x} + \sin (\varphi) \hat{y}$,
+            $\hat{\varphi} = -\sin(\varphi) \hat{x} + \cos(\varphi) \hat{y}$ with $\varphi(t)$.
+            Then:
+            \begin{subequations}
+                \begin{center}
+                    \begin{align}
+                        \frac{d\hat{R}}{dt} &= \frac{d}{dt}(\cos(\varphi)\hat{x}) + \frac{d}{dt}(\sin(\varphi)\hat{y})\\
+                                            &= \frac{d\cos(\varphi)}{dt}\hat{x} + \cos(\varphi)\frac{d\hat{x}}{dt} + \frac{d\sin(\varphi)}{dt}\hat{y} + \sin(\varphi)\frac{d\hat{y}}{dt}\\
+                                            &= -\sin(\varphi) \frac{d\varphi}{dt}\hat{x} + \cos(\varphi) \frac{d\varphi}{dt}\hat{y}\\
+                                            &\Rightarrow \frac{d\hat{R}}{dt} = \frac{d\varphi}{dt}\hat{\varphi}
+                    \end{align}
+                \end{center}
+            \end{subequations}
+            Similarly, $\frac{d\varphi}{dt} = -\frac{d\varphi}{dt}\hat{R}$.
+    \section{Differential operators for vector fields}\label{sec:differential-operators-for-vector-fields}
+        \subsection{Divergence}\label{subsec:divergence}
+        The divergence of a vector field $\vec{F} = F_x \hat{x} + F_y \hat{y} + F_z \hat{z}$ is defined as:
+        \begin{equation}
+            \label{eq:equation2}
+            \text{div } \vec{F} = \nabla \cdot \vec{F} = \frac{\partial F_x}{\partial x} + \frac{\partial F_y}{\partial y} + \frac{\partial F_z}{\partial z}
+        \end{equation}
+        We can derive this operation from taking the scalar product of the gradient operator acting on the vector field
+        $\vec{F}$.\\
+        \textbf{NB:} The divergence of a vector field yields a scalar!
+        \paragraph{Physical interpretation} The divergence of a vector field measures the rate of expansion or diverging of the
+        vector field.
+        For example, the velocity of a gas. $\vec{u}$, with typical flow speed constant $u_0$ and length constant $L$.
+        Then:
+        \begin{enumerate}
+            \item $\vec{u} = \frac{u_0\;}{L} \; x \hat{x}$ $\Rightarrow$ Gas expands away from y-axis with $ \nabla \cdot \vec{u} = 1 \times \frac{u_0}{L}$
+            \item $\vec{u} = -\frac{u_0\;}{L} \; x \hat{x}$ $\Rightarrow$ Gas contracts towards from y-axis with $ \nabla \cdot \vec{u} = -1 \times \frac{u_0}{L}$
+            \item $\vec{u} = \frac{u_0\;}{L} \; \vec{r}$ $\Rightarrow$ Gas expands radially out in 3d with $ \nabla \cdot \vec{u} = 3 \times \frac{u_0}{L}$
+            \item $\vec{u} = \frac{u_0}{L}({y\hat{x} + x \hat{y}})$ $\Rightarrow$ Gas has $\nabla \cdot \vec{u} = 0$ everywhere
+        \end{enumerate}
+        A vector field that has zero divergence everywhere is said to be solenoidal or divergence-free (in fluid dynamics, incompressible).
+        \subsection{The curl operator}\label{subsec:the-curl-operator}
+        We define the curl of a vector field $\vec{F} = F_x \hat{x} + F_y \hat{y} + F_z \hat{z}$ as:
+        \begin{equation}
+            \label{eq:equation3}
+            \text{curl } \vec{F} = \nabla \times \vec{F} = \left(\frac{\partial F_z}{\partial y} - \frac{\partial F_y}{\partial z}\right)\hat{x} + \left(\frac{\partial F_x}{\partial z} - \frac{\partial F_z}{\partial x}\right)\hat{y} + \left(\frac{\partial F_y}{\partial x} - \frac{\partial F_x}{\partial y}\right)\hat{z}
+        \end{equation}
+        Derived by taking the vector (cross) product of the gradient with the vector $\vec{F}$.\\
+        \textbf{NB: } The curl of a vector field yields another vector field! \\
+        Further, a vector field for which $\nabla \times \vec{F} = \vec{0}$ everywhere is irrotational.\\
+
+        \paragraph{Physical interpretation} The curl of a vector field is related to the rotation or twisting of a vector field.
+        Consider again the velocity field of a gas $\vec{u}$ as before.
+        Then:
+        \begin{enumerate}
+            \item $\vec{u} = \frac{u_0\;}{L} \; x \hat{x}$ $\Rightarrow$ is irrotational because $ \nabla \times \vec{u} = \vec{0}$
+            \item $\vec{u} = \frac{u_0\;}{L} \; \vec{r}$ $\Rightarrow$ is irrotational because $ \nabla \times \vec{u} = \vec{0}$
+            \item $\vec{u} = \frac{u_0}{L}({y\hat{x} + x \hat{y}})$ is irrotational because $ \nabla \times \vec{u} = \vec{0}$
+            \item $\vec{u} = \frac{u_0}{L}({-y\hat{x} + x \hat{y}})$ rotates around the z-axis as $\nabla \times \vec{u} = \frac{2u_0}{L}\hat{z}$
+       \end{enumerate}
+        \subsection{The $\vec{F} \cdot \nabla$ operator}\label{subsec:the-$vec{f}-cdot-nabla$-operator}
+            The operator $\vec{F} \cdot \nabla$ is defined as:
+            \begin{equation}
+                \label{eq:equation4}
+                \vec{F} \cdot \nabla = F_x \frac{\partial}{\partial x} + F_y \frac{\partial}{\partial y} + F_z \frac{\partial}{\partial z}
+            \end{equation}
+            Importantly, the operator is not distributive and can act on a scalar or vector field
+            \paragraph{Physical interpretation} Consider a velocity vector field rotating anti-clockwise, i.e. $\vec{u} = \frac{u_0}{L}(-y\hat{x} + x\hat{y})$\\
+            We calculate:
+            \begin{equation}
+                \label{eq:equation5}
+                (\vec{u} \cdot \nabla) \vec{u} = -\frac{u^2_0}{L^2}(x\hat{x} + y\hat{y})
+            \end{equation}
+            This points radially inwards, and is proportional to the centripetal acceleration that bodies feel when following
+            a curved path.
+            \subsection{The Laplacian}\label{subsec:the-laplacian}
+                Recall that the gradient of a scalar $\phi(x,y,z)$ is a vector field $\nabla phi$.
+                We can then take the divergence of $\nabla \phi$ to obtain:
+                \begin{equation}
+                    \label{eq:equation6}
+                    \nabla^2 \phi = \nabla \cdot \nabla \phi = \frac{\partial^2 \phi}{\partial x^2} + \frac{\partial^2 \phi}{\partial y^2} + \frac{\partial^2 \phi}{\partial z^2}
+                \end{equation}
+                Note that it is also possible to take the Laplacian of a vector field:
+                \begin{equation}
+                    \label{eq:equation7}
+                    \nabla^2 \vec{F} = \nabla^2 F_x \hat{x} + \nabla^2 F_y \hat{y} + \nabla^2 F_z \hat{z}
+                \end{equation}
+
+                \paragraph{Physical interpretation} The Laplacian gives the differnece between the average value of a function
+                in the neighborhood of a point, and its value at that point.
+                Thus, in the case of the temperature, the Laplacian tells whether the material surrounding each point is hotter or colder,
+                on the average, than the material at that point.\\
+                Consider the temperature $T$ in a space.
+                Any variations in temperature leads to a thermal flux that will even out these variations.
+                The rate of change of temperature over time is:
+                \begin{equation}
+                    \label{eq:equation8}
+                    \frac{\partial T}{\partial t} = \kappa \nabla^2 T
+                \end{equation}
+                At a maximum temperature, the shape is convex and the slope of $T$ decreases in all directions, hence
+                $\nabla^2 T < 0$.
+                The rate of temperature $\frac{\partial T}{\partial t} < 0$ and the temperature will decrease.\\
+                At a minimum temperature, the shape is concave and the slope of $T$ increases in all directions, hence
+                $\nabla^2 T > 0$.
+                The rate of temperature $\frac{\partial T}{\partial t} > 0$ and the temperature will increase
+            \subsection{Differential operators in suffix notation}\label{subsec:differential-operators-in-suffix-notation}
+                We label the Cartesian coordinates $(x,y,z)$ as $(x_1,x_2,x_3)$
+                \begin{subequations}
+                    \begin{center}
+                        \begin{align}
+                            \nabla = \left( \frac{\partial}{\partial x_1}, \frac{\partial}{\partial x_2}, \frac{\partial}{\partial x_3} \right)
+                        \end{align}
+                        \flushleft {or in suffix notation for the $i$th component:}
+                        \begin{align}
+                        (\nabla)_i = \frac{\partial}{\partial x_i}
+                        \end{align}
+                    \end{center}
+                \end{subequations}
+                For the Gradient:
+                \begin{equation}
+                    \label{eq:equation9}
+                    \nabla \phi = \hat{x_i} \frac{\partial \phi}{\partial x_i}
+                \end{equation}
+            \subsection{Vector operator identities}\label{subsec:vector-operator-identities}
+                \begin{figure}[htp]
+                    \label{fig:figure}
+                    \includegraphics[scale =.75]{vector_diff_rules}
+                \end{figure}
+            \subsection{Differential operators in orthogonal curvilinear coordinates}\label{subsec:differential-operators-in-orthogonal-curvilinear-cooridnates}
+                In many physical problems the geometry is such that other coordinate systems are more convenient than Cartesian
+                coordinates.
+                \subsubsection{Scale Factors}
+                    Consider a transformation from Cartesian coordinates $(x_1,x_2,x_3)$ to another coordinate system $(u_1,u_2,u_3)$
+                    called the curvilinear coordinate system.
+                    There is a one-to-one correspondence between the two coordinate systems, such that:
+                    \begin{equation}
+                        \label{eq:equation10}
+                        x_i = x_i (u_1,u_2,u_3) \; \: \: u_i = u_i(x_1,x_2,x_3)
+                    \end{equation}
+                    Surfaces where $u_i$ is constant are coordinate surfaces.
+                    The intersection of two coordinate surfaces define coordinate curves.\\
+                    Consider a small displacement $d\vec{r} = (dx_1,dx_2,dx_3)$.
+                    Since $x_i$ are a function of $u_i$, we may employ the chain rule:
+                    \begin{equation}
+                        d\vec{r} = \frac{\partial\vec{r}}{\partial u_1} du_1 + \frac{\partial\vec{r}}{\partial u_2} du_2 + \frac{\partial\vec{r}}{\partial u_3} du_3
+                    \end{equation}
+                    Note that the partial derivative $\frac{\partial \vec{r}}{\partial u_1}$ donates the variation with respect to
+                    $u_1$ with respect with $u_2$ and $u_3$ kept constant.
+                    Thus, $\frac{\partial \vec{r}}{\partial u_1}$ must lie in the $u_2$ ad $u_3$ coordinate surfaces and parallel with
+                    the $u_1$ coordinate curve.\\
+                    We define the unit vector in the direction of each coordinate curve as:
+                    \begin{subequations}
+                        \begin{center}
+                            \begin{align}
+                                \hat{e_1} = \frac{1}{h_1}\frac{\partial \vec{r}}{\partial u_1}    && \text{with } h_1 = \left| \frac{\partial \vec{r}}{\partial u_1} \right| \\
+                                \hat{e_2} = \frac{1}{h_2}\frac{\partial \vec{r}}{\partial u_2}    && \text{with } h_2 = \left| \frac{\partial \vec{r}}{\partial u_2} \right| \\
+                                \hat{e_1} = \frac{1}{h_3}\frac{\partial \vec{r}}{\partial u_3}    && \text{with } h_3 = \left| \frac{\partial \vec{r}}{\partial u_3} \right|
+                            \end{align}
+                        \end{center}
+                    \end{subequations}
+                    The quantities $h_i$ are called \textbf{scale factors}.\\\\
+                    We will only consider orthogonal curvilinear coordinate systems (they are perpendicular to each other where they intersect).
+                    Further, the basis vectors $\hat{e_i}$ are also unit vectors.
+                    Thus:
+                    \begin{equation}
+                        \label{eq:equation11}
+                        \hat{e_i} \cdot \hat{e_j} = \delta_{ij}
+                    \end{equation}
+                    We will further assume that the coordinate system will be right-handed, thus:
+                    \begin{subequations}
+                        \begin{align}
+                            \hat{e_1} \times \hat{e_2}  = \hat{e_3} && \text{, } \hat{e_2} \times \hat{e_3}  = \hat{e_1} && \text{, } \hat{e_3} \times \hat{e_1}  = \hat{e_2}
+                        \end{align}
+                    \end{subequations}
+                    From this, we can rewrite the displacement as:
+                    \begin{equation}
+                        \label{eq:equation12}
+                        d\vec{r} = h_1 u_1 \hat{e_1} + h_2 u_2 \hat{e_2} + h_3 u_3 \hat{e_3}
+                    \end{equation}
+                    For the gradient of a scalar field in curvilinear coordinates:
+                    \begin{equation}
+                        \label{eq:equation13}
+                        \nabla f = \frac{1}{h_1} \frac{\partial f}{\partial u_1} \hat{e_1}
+                        + \frac{1}{h_2} \frac{\partial f}{\partial u_2} \hat{e_2}
+                         + \frac{1}{h_3} \frac{\partial f}{\partial u_3} \hat{e_3}
+                    \end{equation}
+                    Divergence is thus:
+                    \begin{equation}
+                        \label{eq:equation14}
+                        \nabla \cdot \vec{F} = \frac{1}{h_1 h_2 h_3}\left( \frac{\partial F_1 h_2 h_3}{\partial u_1}
+                        + \frac{\partial F_2 h_3 h_1}{\partial u_2}
+                        + \frac{\partial F_3 h_1 h_2}{\partial u_3}
+                        \right)
+                    \end{equation}
+                    Curl is then:
+                    \begin{equation}
+                        \label{eq:equation15}
+                        \nabla \times \vec{F} = \frac{1}{h_1 h_2 h_3}
+                        \begin{vmatrix}
+                            h_1 \hat{e_1} && h_2 \hat{e_2} && h_3 \hat{e_3} \\
+                            \frac{\partial}{\partial u_1} &&  \frac{\partial}{\partial u_2} &&  \frac{\partial}{\partial u_3}\\
+                            h_1 F_1 && h_2 F_2 && h_3 F_3
+                        \end{vmatrix}
+                    \end{equation}
+                    The Laplacian can be found by using the definition of divergence with $\vec{F} = \nabla f$
+                    \begin{equation}
+                        \label{eq:equation16}
+                        \nabla^2 f = \frac{1}{h_1 h_2 h_3} \left[ \frac{\partial}{\partial u_1} \left( \frac{h_2 h_3}{h_1}
+                        \frac{\partial f}{\partial u_1}\right)
+                        + \frac{\partial}{\partial u_2} \left( \frac{h_3 h_1}{h_2}
+                        \frac{\partial f}{\partial u_2}\right)
+                        +\frac{\partial}{\partial u_3} \left( \frac{h_1 h_2}{h_3}
+                        \frac{\partial f}{\partial u_3}\right)
+                        \right]
+                    \end{equation}
+                    For the Laplacian of the vector field, use the identity:
+                    \begin{equation}
+                        \label{eq:equation17}
+                        \nabla^2 \vec{F} = \nabla ( \nabla \cdot \vec{F}) - \nabla \times (\nabla \times \vec{F})
+                    \end{equation}
+                \subsubsection{Cylindrical (polar) coordinates $(R, \varphi, z)$}
+                    The Cartesian and cylindrical coordinates are related by:
+                    \begin{equation}
+                        \label{eq:equation18}
+                         x = R \cos (\varphi), \; \; y = R \sin (\varphi), \; \; z = z
+                    \end{equation}
+                    The position vector $\vec{r}$ can be written as:
+                    \begin{equation}
+                        \label{eq:equation19}
+                        \vec{r} = R \cos (\varphi) \hat{x} + R \sin (\varphi) \hat{y} + z \hat{z}
+                    \end{equation}
+                    The scale factors in polar coordinates are:
+                    \begin{subequations}
+                        \begin{align}
+                            h_R = 1 \\
+                            h_{\varphi} = R \\
+                            h_z = 1 \\
+                        \end{align}
+                        \flushleft The basis vectors are:
+                        \begin{align}
+                            \hat{e_R} = \hat{R} \\
+                            \hat{e_\varphi} = \hat{\varphi} \\
+                            \hat{z} = \hat{z}
+                        \end{align}
+                    \end{subequations}
+                    \paragraph{Differential operators:}
+                    \begin{subequations}
+                        \begin{align}
+                            \nabla f  &= \frac{\partial f}{\partial R} \hat{e_R} + \frac{1}{R}\frac{\partial f}{\partial \varphi} \hat{e_{\varphi}}
+                            + \frac{\partial f}{\partial z} \hat{e_z}\\
+                             \nabla \cdot \vec{F} &= \frac{1}{R}\frac{\partial}{\partial R}(RF_R)
+                            + \frac{1}{R}\frac{\partial F_{\varphi}}{\partial \varphi} + \frac{\partial F_z}{\partial z}\\
+                             \nabla \times \vec{F} &= \frac{1}{R}
+                            \begin{vmatrix}
+                                \hat{e_R} && R \hat{e_\varphi} && \hat{e_z} \\
+                                \frac{\partial}{\partial R} && \frac{\partial}{\partial \varphi} && \frac{\partial}{\partial z} \\
+                                F_R && R F_{\varphi} && F_z
+                            \end{vmatrix}\\
+                            \nabla^2 f &= \frac{1}{R}\frac{\partial}{\partial R}\left(
+                            R \frac{\partial f}{\partial R}\right) + \frac{1}{R^2}\frac{\partial^2 f}{\partial \varphi^2}
+                            + \frac{\partial^2 f}{\partial z^2}
+                        \end{align}
+                    \end{subequations}
+                \subsubsection{Spherical (polar) coordinates}
+                    The Cartesian and spherical coordinates are related via:
+                    \begin{equation}
+                        \label{eq:equation20}
+                        x = r \sin(\theta)\cos(\varphi), \; \; y = r \sin(\theta)\sin(\varphi), \; \; z = r\cos(\theta)
+                    \end{equation}
+                    The position vector $\vec{r}$ can be written as:
+                    \begin{equation}
+                        \label{eq:equation21}
+                        \vec{r} = r \sin(\theta)\cos(\varphi)\hat{x} + r\sin(\theta)\sin(\varphi)\hat{y} + r \cos(\theta)\hat{z}
+                    \end{equation}
+                    The scale factors are:
+                    \begin{subequations}
+                        \begin{align}
+                            h_r &= 1\\
+                            h_{\theta} &= r\\
+                            h_{\varphi} &= r \sin(\theta)
+                        \end{align}
+                        \flushleft The basis vectors are:
+                        \begin{align}
+                            \hat{e_r} &= \hat{r}\\
+                            \hat{e_\theta} &= \hat{\theta}\\
+                            \hat{e_\varphi} &= \hat{\varphi}
+                        \end{align}
+                        \paragraph{Differential operators:}
+                        \begin{subequations}
+                            \begin{align}
+                                \nabla f  &= \frac{\partial f}{\partial r} \hat{e_r} + \frac{1}{r}\frac{\partial f}{\partial \theta} \hat{e_{\theta}}
+                                + \frac{1}{r\sin(\theta)}\frac{\partial f}{\partial \varphi} \hat{e_\varphi}\\
+                                \nabla \cdot \vec{F} &= \frac{1}{r^2}\frac{\partial}{\partial r}(r^2 F_r)
+                                + \frac{1}{r \sin(\theta)}\frac{\partial}{\partial \theta}(\sin(\theta) F_\theta) + \frac{1}{r \sin (\theta)}\frac{\partial F_\varphi}{\partial \varphi}\\
+                                \nabla \times \vec{F} &= \frac{1}{r^2 \sin(\theta)}
+                                \begin{vmatrix}
+                                    \hat{e_r} && r \hat{e_\theta} && r\sin(\theta)\hat{e_\varphi} \\
+                                    \frac{\partial}{\partial r} && \frac{\partial}{\partial \theta} && \frac{\partial}{\partial \varphi} \\
+                                    F_r && r F_{\theta} && r\sin(\theta) F_{\theta}
+                                \end{vmatrix}\\
+                                \nabla^2 f &= \frac{1}{r^2}\frac{\partial}{\partial r}\left(
+                                r^2 \frac{\partial f}{\partial r}\right) + \frac{1}{r^2 \sin(\theta)}\frac{\partial }{\partial \theta}\left( \sin(\theta) \frac{\partial f}{\partial \theta} \right)
+                                + \frac{1}{r^2 \sin^2(\theta)}\frac{\partial^2 f}{\partial \varphi^2}
+                            \end{align}
+                        \end{subequations}
+                    \end{subequations}
+\end{document}
