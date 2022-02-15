@@ -6,6 +6,8 @@
 \title{Integration of Vectors}
 % Packages
 \usepackage{amsmath}
+\usepackage{esint}
+
 
 % Document
 \begin{document}
@@ -27,5 +29,219 @@
                 \label{eq:equation}
                 \int_{C} \vec{F}(\vec{r}) \cdot d\vec{r} = \int_{a}^{b} \vec{F}(\vec{r(t)}) \cdot \frac{d\vec{r(t)}}{dt} dt
             \end{equation}
-            where $d\vec{r}$ is the curve's displacement vector or line element
+            where $d\vec{r}$ is the curve's displacement vector or line element.
+            The Line Integral can also be represented as:
+            \begin{equation}
+                \label{eq:equation2}
+                \int_{C} \vec{F}(\vec{r}) \cdot d\vec{r} = \int_{C} F_x \: dx + F_y \: dy + F_z \: dz
+            \end{equation}
+        \subsection{Other forms of line integrals}\label{subsec:other-forms-of-line-integrals}
+            The most common type of line integral is $\int_{C} \vec{F} \cdot d\vec{r}$.
+            This line integral occurs in areas of physics to calculate the work done by a constant force field
+            $\vec{F}$ in moving an object along the curve C.
+            \\If we introduce the \textbf{unit tangent vector} $\vec{T} \equiv \frac{d\vec{r}}{ds}$ for arc length
+            $s$ along the curve $C$, this i also often expressed as the line integral with respect to arc
+            length of the tangential component of the vector field:
+            \begin{subequations}
+                \begin{align}
+                    \label{eq:equation3}
+                    \int_{C} \vec{F} \cdot d\vec{r} &= \int_{C} \vec{F} \cdot \vec{T} ds
+                \end{align}
+                \flushleft Even though integrals with respect to arc length are unchanged when orientation is
+                reversed, it is still true that:
+                \begin{align}
+                    \int_{C} \vec{F} \cdot d\vec{r} &= - \int_{C} \vec{F} \cdot d\vec{r}
+                \end{align}
+                \flushleft this is because the unit tangent vector $\vec{T}$ is replaced by its negative when
+                $C$ is replaced by $-C$
+            \end{subequations}
+            \\
+            However, line integrals also come in other forms where $\phi$ is a scalar field, and $ds = | d\vec{r} |$.
+            All are solved in the same way via parameterization of the curve.
+            \begin{enumerate}
+                \item $\int_{C} \phi \: ds$ \textbf{The result is a scalar as $\phi ds$ is a scalar}
+                \item $\int_{C} \phi \: d\vec{r}$ \textbf{The result is a vector because $d\vec{r}$ is a vector}
+                \item $\int_{C} \vec{F} \times d\vec{r}$ \textbf{The result is a vector as $\vec{F} \times d\vec{r}$ is a vector}
+            \end{enumerate}
+        \subsection{Conservative vector fields}\label{subsec:conservative-vector-fields}
+            In general, a line integral depends on the vector field, the start and end points, and the shape of the path
+            the curve takes.
+            There are special cases when the line integral does not depend on the shape of the path taken.\\
+            A vector field $\vec{F}$ is said to be \textbf{conservative} if its line integral around
+            any closed curve $C$ is zero, \textbf{i.e}
+            \begin{subequations}
+                \label{eq:equation4}
+                \begin{align}
+                    \oint_{C} \vec{F} \cdot d\vec{r} = 0
+                \end{align}
+                \flushleft An equivalent definition is that $\vec{F}$ is conservative if the line integral along a curve
+                only depends on the star and end point but not on the path taken, \textbf{i.e}:
+                \begin{align}
+                    \int_{C_1} \vec{F} \cdot d\vec{r} = \int_{C_2} \vec{F} \cdot d\vec{r}
+                \end{align}
+                \flushleft where $C_1$ and $C_2$ are any two curves that share the same start and end points
+            \end{subequations}
+            \subsubsection{Potential function of a vector field}
+                If a vector field $\vec{F}$ is related to a scalar field $\phi$ by $\vec{F} = \nabla \phi$
+                with $\nabla \phi$ existing everywhere within some region $D$, then $\vec{F}$ is conservative
+                within $D$.\\
+                Conversely, if $\vec{F}$ is conservative, then $\vec{F}$ can be written as the gradient of a scalar field,
+                $\vec{F} = \nabla \phi$
+                \paragraph{Notes}
+                \begin{enumerate}
+                    \item The potential $\phi$ is not unique since an arbitrary constant can be added to $\phi$ without it affecting $\vec{F} = \nabla \phi$.
+                    \item The curl of a conservative field is zero: $\nabla \times \vec{F} = \nabla \times \nabla \phi = \vec{0}$.
+                    Thus, a vector field with zero curl mut be conservative.
+                    \item The line integral of a conservative vector field depends only on the start and end points of the curve,
+                    and not on the path taken
+                \end{enumerate}
+        \section{Surface integrals}\label{sec:surface-integrals}
+            Similarly to integrating fields over a curve yielding a line integral, we can also integrate fields over surfaces.
+            To achieve this, we must first see how to represent a surface.
+            \subsection{Representation of surfaces}\label{subsec:representation-of-surfaces}
+                Surfaces are two-dimensional objects and require two parameters to be defined.
+                We choose the name those two parameters $u$ and $v$, and define the surface as the structure traced out by the position vector:
+                \begin{equation}
+                    \label{eq:equation5}
+                    \vec{r}(u,v) = (f(u,v), g(u,v), h(u,v))
+                \end{equation}
+                Where $u$ and $v$ vary in some region $R$ of the $uv$-plane.
+            \subsection{Tangent plane and surface normal}\label{subsec:tangent-plane-and-surface-normal}
+                If in the surface $\vec{r}(u,v)$ we fi one parameter, say $u = u_0$, and vary the other,
+                then we obtain the equation of a curve on the surface.
+                \textbf{e.g}
+                \begin{subequations}
+                    \flushleft On a spherical shell of radius $a$, we can fix $\theta = \theta_0 = \pi/4$, to obtain:
+                    \begin{align}
+                        \vec{r}(\theta_0, \varphi) &= (a\sin(\theta_0) \cos(\varphi), a\sin(\theta_0) \sin(\varphi), a\cos(\theta_0))
+                                                  \\ &= \frac{a}{\sqrt {2}}(\cos(\varphi),\sin(\varphi),1)
+                    \end{align}
+                    \flushleft This is a circle of radius $a/\sqrt {2}$ on the plane $z = a/\sqrt {2}$
+                \end{subequations}
+                \\\\More generally, for $\vec{r}(u,v)$ we have two curves at a point $P = (u_0, v_0)$
+                and we can define the tangent vectors to those curves:
+                \begin{subequations}
+                    \begin{align}
+                        \frac{\partial \vec{r}}{\partial u} &=
+                        \left( \frac{\partial f}{\partial u},
+                        \frac{\partial g}{\partial u},
+                        \frac{\partial h}{\partial u}\right)\\
+                        \frac{\partial \vec{r}}{\partial v} &=
+                        \left( \frac{\partial f}{\partial v},
+                        \frac{\partial g}{\partial v},
+                        \frac{\partial h}{\partial v}\right)
+                    \end{align}
+                    \flushleft The tangent vectors define the tangent plane to the surface at $P$.
+                    The cross product of $\partial \vec{r} / \partial u$ and  $\partial \vec{r} / \partial v$
+                    gives the normal vector $\vec{n}$ of the tangent plane at $P$ \textbf{i.e}
+                    \begin{align}
+                        \vec{n} = \frac{\partial \vec{r}}{\partial u} \times \frac{\partial \vec{r}}{\partial v}, \; \; ( \neq 0)
+                    \end{align}
+                    \flushleft By convention we define the \textbf{surface normal} to be the unit vector
+                    locally perpendicular to the surface and pointing outwards for closed surfaces, \textbf{i.e}
+                    \begin{align}
+                        \hat{n} = \frac{\frac{\partial \vec{r}}{\partial u} \times \frac{\partial \vec{r}}{\partial v} }{| \frac{\partial \vec{r}}{\partial u} \times \frac{\partial \vec{r}}{\partial v} |}
+                    \end{align}
+                \end{subequations}
+            \subsection{Surface Area}\label{subsec:surface-area}
+                We already know from geometry that the area of the parallelogram spanned by two vectors
+                $\vec{a}$ and $\vec{b}$ with an angle $\theta$ between them is $| \vec{a} \times \vec{b} = ab | \sin(\theta)|$.\\
+                We apply this parameterised surface to define the area of the parallelogram spanned by the
+                two surface tangent vectors.
+                \\
+                This allows us to find the area of the parameterised surface:
+                \begin{equation}
+                    \label{eq:equation6}
+                    \text{Area} = \iint_{S} dA = \iint_{R} \left| \frac{\partial \vec{r}}{\partial u} \times \frac{\partial \vec{r}}{\partial v} \right| du \; dv
+                \end{equation}
+                where $R$ is the region of the $uv$-surface.
+            \subsection{Explicitly defined surface by graph}\label{subsec:explicitly-defined-surface-by-graph}
+                Sometimes a surface is defined explicitly tby the graph of a function.
+                In this case, we parameterise the surface using $u = x$ and $v = y$:
+                \begin{subequations}
+                    \begin{align}
+                        \vec{r}(u,v) = \vec{r}(x,y) = (x, y, f(x,y))
+                    \end{align}
+                    \flushleft and the tangent vectors:
+                    \begin{align}
+                        \frac{\partial \vec{r}}{\partial x} &= \left( 1, 0, \frac{\partial f}{\partial x} \right)\\
+                        \frac{\partial \vec{r}}{\partial y} &= \left( 0, 1, \frac{\partial f}{\partial y} \right)
+                    \end{align}
+                    \flushleft Hence,
+                    \begin{align}
+                        \vec{n} &= \frac{\partial \vec{r}}{\partial x} \times \frac{\partial \vec{r}}{\partial y}
+                                = \left( -\frac{\partial f}{\partial x}, -\frac{\partial f}{\partial y}, 1  \right)\\
+                        \left| \frac{\partial \vec{r}}{\partial x} \times \frac{\partial \vec{r}}{\partial y} \right| &=
+                        \sqrt {1 + \left( \frac{\partial f}{\partial x} \right)^2 + \left( \frac{\partial f}{\partial y} \right)^2}
+                    \end{align}
+                    \flushleft So that the surface element is:
+                    \begin{align}
+                        dA = \sqrt {1 + \left( \frac{\partial f}{\partial x} \right)^2 + \left( \frac{\partial f}{\partial y} \right)^2} dx \; dy
+                    \end{align}
+                    \flushleft Then the area of the surface $z = f(x,y)$ becomes
+                    \begin{align}
+                        \iint_{S} dA =  \iint_R \sqrt {1 + \left( \frac{\partial f}{\partial x} \right)^2 + \left( \frac{\partial f}{\partial y} \right)^2} dx \; dy
+                    \end{align}
+                \end{subequations}
+            \subsection{Surface integral of a scalar field}\label{subsec:surface-integral-of-a-scalar-field}
+                We define the integral of a scalar field $\varphi$ over the surface $S$ as:
+                \begin{equation}
+                    \label{eq:equation7}
+                    \iint_S \varphi dA = \iint_R \varphi(\vec{r}(u, v)) \left| \frac{\partial \vec{r}}{\partial u} \times \frac{\partial \vec{r}}{\partial v} \right| du \; dv
+                \end{equation}
+                Note when $\varphi = 1$ we calculate the area of the parameterised surface.
+            \subsection{Surface integral of a vector field and flux}\label{subsec:surface-integral-of-a-vector-field-and-flux}
+                For a surface $S$ parameterised as $\vec{r}(u, v)$ and a vector field $\vec{F}(\vec{r})$,
+                we define the integral of that vector field along the sruface as:
+                \begin{equation}
+                    \label{eq:equation8}
+                    \iint_S \vec{F} \cdot \hat{n} dA = \iint_R \vec{F} \cdot \hat{n} \left| \frac{\partial \vec{r}}{\partial u} \times \frac{\partial \vec{r}}{\partial v} \right| du \; dv
+                \end{equation}
+                The scalar quantity $ \iint_S \vec{F} \cdot \hat{n} dA$ is called the \textbf{flux} of the vector field
+                $\vec{F}$ through the surface $S$.
+                \\
+                \textbf{NB:} for closed surfaces we use the notation:
+                \begin{equation}
+                    \label{eq:equation9}
+                    \oiint \vec{F} \cdot d\vec{S}
+                \end{equation}
+                \subsubsection{Physical interpretation}
+                    Suppose a fluid flows with velocity $\vec{u}$ through a pipe with cross-sectional area A\@.
+                    The \textbf{flux} through the pipe is the total volume of fluid passing through the pipe
+                    per unit time, or the flux across the surface $S$ with are $A$.
+                    \begin{enumerate}
+                        \item Suppose the pipe's cross-sectional area is constant and equal to A, and that
+                        \textbf{the velocity is uniform and directed parallel} to the walls of the pipe with
+                        speed $u_0 = | \vec{u} |$.
+                        Then the fluid moves along the pipe as if it were a solid block.
+                        In a time interval $\Delta t$ the fluid passes a distance $u_0 \Delta t$ and so a block of fluid
+                        of volume $u_0 \Delta t A$ emerges from the end of the pipe.
+                        The flow rate or flux $Q$ of fluid through the pipe is therefore this volume per unit time, \textbf{i.e}
+                        $Q = u_0 A$.
+                        \item Suppose \textbf{the speed} of the flow is still parallel to the walls but
+                        \textbf{depends on the position within the pipe} \textbf{i.e} $|\vec{u}| = u_0 (x,y)$.
+                        Assume the cross-section of the pipe is a square $ 0 \leq x \leq 1$, $ 0 \leq y \leq 1$.
+                        A small surface element with area $dA$ is a small rectangle with sides of lengths $dx$ and $dy$
+                        , located a point $(x,y)$ on $S$, \textbf{i.e} $dA = dx \; dy$\\
+                        The flux $dQ$ of fluid across the surface element $dA$ is: $dQ = u_0(x, y) dA = u_0(x, y) \; dx \: dy$.
+                        The total flux follows from adding up all small contributions $dQ$:
+                        \begin{align}
+                            Q = \iint_S u_0 (x, y) \;dx \: dy = \int_{0}^{1} \int_{0}^{1} u_0 (x, y) \; dx \: dy
+                        \end{align}
+                        \item Consider the \textbf{general case} where both \textbf{velocity field} $\vec{u}$
+                        \textbf{and surface} $S$ \textbf{are arbitrary} \textbf{i.e} $\vec{u}$ may not be parallel to
+                        the walls and $S$ may be a non-planar surface.
+                        Again, we consider the flux of $\vec{u}$ across the surface element $dA$.
+                        However, $\vec{u}$ is not necessarily perpendicular to the surface $dA$.
+                        Therefore, we need to extract the component of $\vec{u}$ perpendicular to the surface $dA$.
+                        We make use of the unit normal vector $\hat{n}$ that is perpendicular to the surface $dA$.
+                        Hence, the required component is $\vec{u} \cdot \hat{n}$.
+                        The flux across surface element $dA$ is $dQ = \vec{u} \cdot \hat{n} \: dA$.
+                        The total flux Q is:
+                        \begin{align}
+                            Q = \iint_S \vec{u}(x,y) \cdot \hat{n} \: dA
+                        \end{align}
+                        Since $\hat{n}$ points outwards from the pipe, a positive (negative) value of $Q$ implied fluid flowing out
+                        (into) the pipe.
+                    \end{enumerate}
 \end{document}
