@@ -244,4 +244,76 @@
                         Since $\hat{n}$ points outwards from the pipe, a positive (negative) value of $Q$ implied fluid flowing out
                         (into) the pipe.
                     \end{enumerate}
+        \section{Volume Integrals}\label{sec:volume-integrals}
+            Consider an object of volume $V$ and density $\rho$.
+            If $\rho$ is uniform, then the mass of the object is $M = \rho V$.
+            But hat if the density is a function of position, some $\rho(\vec{r})$?
+            \\
+            We divide the volume into $N$ small pieces with volume $\delta V_i$, $i = 1,2,\dots,N$, called the \textbf{volume elements}.
+            Then the mass of the volume element $\delta V_i$ at position $\vec{r_i}$ is simply $\delta M_i = \rho(\vec{r_i}) \delta V_i$.
+            The total mass is the sum over all positions:
+            \begin{subequations}
+                \begin{align}
+                    M = \sum_{i = 1}^{N} \delta M_i = \sum_{i=1}^{N} \rho(\vec{r}_i)\delta V_i
+                \end{align}
+                \flushleft In the limit of infinitesimally small volume elements and $N \rightarrow \infty$,
+                we obtain a volume integral:
+                \begin{align}
+                    \iiint_{V} \rho dV = \lim_{N \rightarrow \infty} \sum_{i=1}^{N} \rho(\vec{r}_i)\delta V_i
+                \end{align}
+                \flushleft If we set $\rho = 1$, we actually calculate the total volume itself
+            \end{subequations}
+            \paragraph{Definition}\\
+            Consider a closed surface in space enclosing a volume $V$, then the following \textbf{volume integrals, space integrals}
+            or \textbf{triple integrals}:
+            \begin{equation}
+                \label{eq:equation10}
+                \iiint_{V} \vec{A} \; dV \text{    and     } \iiint_{V} \phi \; dV
+            \end{equation}
+            where $\vec{A}$ is a vector field, $\phi$ is a scalar field, and $V$ is a 3D volume.
+            \subsection{Volume elements in different coordinate systems}\label{subsec:volume-elements-in-different-coordinate-systems}
+                \begin{enumerate}
+                    \item \textbf{Cartesian coordinates} $(x,y,z)$: $dV = dx dy dz$
+                    \item \textbf{Cylindrical coordinates} $(R,\varphi,z)$:  $dV = R dR d\varphi dz$
+                    \item \textbf{Spherical coordinates} $(r, \theta, \phi)$: $dV = r^2 \sin(\theta) dr d\theta d\varphi$
+                \end{enumerate}
+            \subsection{The Jacobian}\label{subsec:the-jacobian}
+                We already know from geometry that the volume of the parallelepiped spanned by three vectors $\vec{a}$,
+                $\vec{b}$ and $\vec{c}$ is $|(\vec{a} \times \vec{b}) \cdot \vec{c}$.
+                Applying this to the parameterised volume to define the volume of the parallelepiped spanned by three surface tangent
+                vectors we get the \textbf{Jacobian}:
+                \begin{subequations}
+                    \begin{align}
+                        J = \frac{\partial(x,y,z)}{\partial(u,v,w)} = \left \left( \frac{\partial \vec{r}}{\partial u} \times \frac{\partial \vec{r}}{\partial v} \right)  \cdot \frac{\partial \vec{r}}{\partial w}\right|
+                        = \begin{vmatrix}
+                              \frac{\partial x}{\partial u} & \frac{\partial y}{\partial u} & \frac{\partial z}{\partial u} \\
+                              \frac{\partial x}{\partial v} & \frac{\partial y}{\partial v} & \frac{\partial z}{\partial v} \\
+                              \frac{\partial x}{\partial w} & \frac{\partial y}{\partial w} & \frac{\partial z}{\partial w}
+                        \end{vmatrix}
+                    \end{align}
+                    \flushleft This allows us to write a volume, or triple, integral originally written in terms of Cartesian coordinates
+                    \begin{align*}
+                        \iiint_{V} f(x,y,z) \; dx dy dz
+                    \end{align*}
+                    \flushleft instead in terms of another coordinate system $(u,v,w)$:
+                    \begin{align*}
+                        \iiint_{V} f(u,v,w) J \; du dv dw
+                    \end{align*}
+                    \flushleft where $f$, $J$ and the integration limits must be in terms of the new variables $u$, $v$ and $w$
+                \end{subequations}
+        \section{Integral Theorems}\label{sec:integral-theorems}
+            There are two important theorems that link line, surface and volume integrals with the definitions of the divergence and curl 
+            operators.
+            These theorems have significance in deriving mathematical equations representing physical laws.
+            \subsection{Divergence Theorem}\label{subsec:divergence-theorem}
+                The transformation between \textbf{triple} and \textbf{surface} integrals, which involves the \textbf{divergence} of a vector function $\vec{F}$.
+                \paragraph{Theorem} Consider a continuously differentiable vector field $\vec{F}$ defined on a volume $V$ that is enclosed by a surface $S$.
+                Then:
+                \begin{equation}
+                    \label{eq:equation11}
+                    \iiint_{V} \nabla \cdot \vec{F} \; dV = \oiint_{S} \vec{F} \cdot d\vec{S}
+                \end{equation}
+                where $d\vec{S} = \hat{n} dS$.\\
+            \textbf{This theorem says that the total expansion of a vector field over a volume is equal to the flux
+            of that vector field through the bounding surface.}
 \end{document}
