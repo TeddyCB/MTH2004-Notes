@@ -38,7 +38,7 @@
         \subsection{Other forms of line integrals}\label{subsec:other-forms-of-line-integrals}
             The most common type of line integral is $\int_{C} \vec{F} \cdot d\vec{r}$.
             This line integral occurs in areas of physics to calculate the work done by a constant force field
-            $\vec{F}$ in moving an object along the curve C.
+            $\vec{F}$ in moving an object along the curve C\@.
             \\If we introduce the \textbf{unit tangent vector} $\vec{T} \equiv \frac{d\vec{r}}{ds}$ for arc length
             $s$ along the curve $C$, this i also often expressed as the line integral with respect to arc
             length of the tangential component of the vector field:
@@ -316,4 +316,18 @@
                 where $d\vec{S} = \hat{n} dS$.\\
             \textbf{This theorem says that the total expansion of a vector field over a volume is equal to the flux
             of that vector field through the bounding surface.}
+            \subsection{Stokes' Theorem}\label{subsec:stokes'-theorem}
+                This describes the transformation between \textbf{surface} and \textbf{line} integrals, which involves
+                the \textbf{curl} of a vector function $\vec{F}$
+                \paragraph{Theorem} Consider a continuously differentiable vector field $\vec{F}$ defined
+                within an open surface $S$.
+                Then,
+                \begin{equation}
+                    \label{eq:equation12}
+                    \iint_{S} \nabla \times \vec{F} \cdot d\vec{S} = \oint_{C} \vec{F} \cdot d\vec{r}
+                \end{equation}
+                where $d\vec{S} = \hat{n} dS$ and the direction of the line integral around $C$ and the unit
+                normal $\hat{n}$ are oriented in a right-hand sense
+                \textbf{This theorem says that the total flux of curl of a vector field through a surface is equal
+                to the closed line integral of that vector field around the surface boundary}
 \end{document}

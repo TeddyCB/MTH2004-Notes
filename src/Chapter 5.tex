@@ -1,0 +1,247 @@
+%! Author = teddy
+%! Date = 28/02/2022
+
+% Preamble
+\documentclass[11pt]{article}
+\title{Application: Fluid Dynamics}
+% Packages
+\usepackage{amsmath}
+\usepackage{esint}
+% Document
+\begin{document}
+\maketitle
+    \section{The Continuity Equation}\label{sec:the-continuity-equation}
+        \subsection{Preliminaries}\label{subsec:preliminaries}
+            We consider the motion of a fluid in a region $R$ having no sources or sinks in $R$, meaning 
+            no points at which fluid is produced or disappears.\\
+            \begin{enumerate}
+                \item \textbf{In a fluid state}, a volume element of fluid has:\begin{enumerate}
+                          \item \textbf{mass density} $\rho(\vec{r}, t)$, \textbf{i.e} a mass per unit volume that
+                          can be a function of spatial location and time.
+                          \begin{enumerate}
+                              \item If the density is uniform in space and constant with time, the fluid is called \textbf{incompressible} with $\rho = \rho_0$.
+                              \item Otherwise, it is \textbf{compressible}.
+                          \end{enumerate}
+                          \item \textbf{pressure} $p(\vec{r},t)$, \textbf{i.e} force exerted by the fluid per unit area that can be a function of spatial location and time.
+                          \item \textbf{fluid velocity} $\vec{u}(\vec{r},t)$, \textbf{i.e} velocity of the fluid volume element at location $\vec{r}$ at time $t$.
+                                                                                   \begin{enumerate}
+                                                                                       \item If the velocity is constant with time, the fluid flow is called \textbf{steady}, with $\vec{u}(\vec{r})$ only:
+                                                                                                \begin{subequations}
+                                                                                                    \label{eq:equation}
+                                                                                                    \begin{align*}
+                                                                                                        \frac{\partial \vec{u}}{\partial t} &= 0\\
+                                                                                                        \frac{\partial \rho}{\partial t} &= 0\\
+                                                                                                        \frac{\partial p}{\partial t} &= 0
+                                                                                                    \end{align*}
+                                                                                                \end{subequations}
+                                                                                       \item Otherwise, it is \textbf{unsteady}.
+                                                                                       Some stagnation point $\vec{r}*$ may exist where $\vec{u}(\vec{r}*,t) = 0$
+                                                                                   \end{enumerate}
+                \end{enumerate}
+                \item The concept of the fluid state covers both liquids, gases and plasmas.
+                        \begin{enumerate}
+                            \item \underline{Liquids:} Generally incompressible, \textbf{i.e} fluid density uniform in space and constant in time:$\rho = \rho_0$
+                            \item \underline{Gases:} Generally compressible, \textbf{i.e.} density depends on location in space and may vary with time:$\rho = \rho(\vec{r},t)$
+                            \item \underline{Plasmas: } Generally compressible, combination of fluids of positive and negative charges that is quasi-neutral on the fluid scale
+                        \end{enumerate}
+                \item Two approaches in considering a volume element of fluid:
+                    \begin{enumerate}
+                        \item \textbf{Eulerian approach: } We consider the fluid flow at a point in space as time progresses.
+                        This implies that in the volume element at that location the identity of the material continuously changes as fluid flows away and into that
+                        volume.\\
+                        This approach is comparable to observing the fluid flow of a stream from a fixed point on the embankment
+                        \item \textbf{Lagrangian approach: }We consider the fluid flow as we track the position of the volume element in space with time.
+                        The identity of teh fluid material in the volume element is preserved. \\
+                        This approach is comparable to observing the fluid flow of a stream whilst moving with the flow in a boat.
+                    \end{enumerate}
+                \item Let $f(x,y,z,t)$ denote some quantity of interest in the fluid motion, \textbf{e.g.} a component of velocity $\vec{u}$ or mass density $\rho$.\\\\
+                    \begin{subequations}
+                        $\frac{\partial f}{\partial t}$: Eulerian rate of change of $f$ at a fixed position in space $(x,y,z)$\\\\
+                        $\frac{df}{dt}$: Lagrangian rate of change of $f$ following the fluid \textbf{i.e.} $x(t), y(t), z(t)$ change
+                        with time at the local flow velocity:
+                        \begin{align*}
+                            \frac{dx}{dt} = u_x && \frac{dy}{dt} = u_y && \frac{dz}{dt} = u_z
+                        \end{align*}
+                        We can connect the Lagrangian and Eulerian rates of change:
+                        \begin{align*}
+                            \frac{Df}{Dt} = \frac{\partial f}{\partial t} + (\vec{u} \cdot \nabla)f
+                        \end{align*}
+                    \end{subequations}
+            \end{enumerate}
+        \subsection{Mass flux through a surface}\label{subsec:mass-flux-through-a-surface}
+            Consider a fluid with mass density $\rho$ and velocity $\vec{u}$.\\
+            The flux of the vector field $\rho \vec{u}$ through a surface element $d\vec{S}$ is called the \textbf{mass flux}
+            \begin{equation}
+                \label{eq:equation2}
+                \rho \vec{u} \cdot d\vec{S} = \rho \vec{u} \cdot \hat{n} dS
+            \end{equation}
+            Consider a closed surface $S$ bounding an arbitrary spatially \underline{fixed} volume $V$ of fluid.
+            The \textbf{total mass flux} through the whole surface:
+            \begin{equation}
+                \label{eq:equation3}
+                \oiint_{S} \rho \vec{u} \cdot d\vec{S}
+            \end{equation}
+            where we have the convention that hte surface normal points outwards.
+        \subsection{Conservation of mass}\label{subsec:conservation-of-mass}
+            At any time the mass of the fluid within a fixed volume $V$:
+            \begin{subequations}
+                \begin{align*}
+                    M = \iiint_{V} \rho dV
+                \end{align*}
+                If the mass changes in time from $M(t)$ to $M(t + dt) = M(t) dM(t)$ due to the fluid leaving or
+                entering the volume, then the rate of change of mass with time is:
+                \begin{align*}
+                    \frac{dM}{dt} = \frac{d}{dt} \iiint_V \rho dV = \iiint_V \frac{\partial \rho}{\partial t} dV
+                \end{align*}
+                This rate must be balanced by a mass flux through the bounding surface:
+                \begin{align*}
+                    \frac{dM}{dt} = -\oiint_S \rho \vec{u} \cdot d\vec{S}
+                \end{align*}
+                The minus sign is added because when fluid flows outwards through the surface, the mass flux is positive, but it corresponds
+                to a decrease in mass inside the volume.
+                We obtain:
+                \begin{align*}
+                    \oiint_S \rho \vec{u} \cdot d\vec{S} = \iiint_V \nabla \cdot (\rho \vec{u}) dV
+                \end{align*}
+                Mass conservation then becomes:
+                \begin{align*}
+                    \iiint_V \frac{\partial \rho}{\partial t} dV = - \iiint_V \nabla \cdot (\rho \vec{u}) dV
+                \end{align*}
+                Finally, because the volume $V$ is chosen arbitrarily, we can remove the volume integrals to find the vecotr form
+                of mass conservation:
+                \begin{align*}
+                    \frac{\partial \rho}{\partial t} + \nabla \cdot (\rho \vec{u}) = 0
+                \end{align*}
+                This equation is called the \textbf{Continuity Equation}, or \textbf{mass conservation equation}.
+                It describes at a location that rate of change of density over time is due to an expanding (or contracting) flow
+                \\We can write the Lagrangian version of the Continuity Equation as:
+                \begin{align*}
+                    \frac{D \rho}{D t} + \rho \nabla \cdot \vec{u} = 0
+                \end{align*}
+                \begin{enumerate}
+                    \item \textbf{If the fluid is \underline{incompressible}:}
+                        \begin{align*}
+                            \frac{D \rho}{D t} = \left[ \frac{\partial}{ \partial t} + \vec{u} \cdot \nabla \right] \rho = 0
+                        \end{align*}
+                        \begin{enumerate}
+                            \item Fluid of constant and uniform density
+                            \item Or, if the fluid is not uniform, the shape is advected (without changing shape) in the direction of $\vec{u}$,
+                            \textbf{i.e} any inhomogeneity is transported with the flow:
+                                \begin{align*}
+                                    \text{incompressible} \Leftrightarrow \nabla \cdot \vec{u} = 0
+                                \end{align*}
+                            \textbf{Physical Interpretation:} If a fluid is incompressible, it cannot be expanded or compressed at any location or at any time.
+                        \end{enumerate}
+                    \item \textbf{if the flow is \underline{steady}:}
+                        the fluid is constant in time \textbf{i.e} $\frac{\partial \rho}{\partial t} = 0$
+                        \begin{align*}
+                            \text{steady flow} \Leftrightarrow \nabla \cdot (\rho \vec{u}) = 0
+                        \end{align*}
+                        \textbf{Physical meaning:} The mass flux is conserved, \textbf{i.e} the same amount of mass enters a volume as it leaves
+                \end{enumerate}
+            \end{subequations}
+        \subsection{Particle paths or pathlines}\label{subsec:particle-paths-or-pathlines}
+            A particle path or pathline is the trajectroy of a fluid element of fixed identity as a function of time $\vec{r}(\vec{r}_0, t)$,
+            where $\vec{r}_0$ is the initial position of the fluid element.
+            At the position $\vec{r}$ at time $t$ the fluid element moves with the velocity $\vec{u}(\vec{r},t)$.
+            Therefore, we can repeat the Lagrangian rate of change:
+            \begin{subequations}
+                \begin{align*}
+                    & \frac{d\vec{r}}{dt} = \vec{u}(\vec{r}, t)\\
+                    & \vec{r}(t) = x(t)\hat{x} + y(t)\hat{y} + z(t)\hat{z}
+                \end{align*}
+                or in component form:
+                \begin{align*}
+                    \frac{dx}{dt} = u_x && \frac{dy}{dt} = u_y && \frac{dz}{dt} = u_z
+                \end{align*}
+            \end{subequations}
+    \subsection{Equation of motion}\label{subsec:equation-of-motion}
+        \subsection{Acceleration}\label{subsec:acceleration}
+            Applying the Lagrangian derivative to each velocity component $(u_x, u_y, u_z)$ gives the acceleration
+            of a moving fluid element:
+            \begin{subequations}
+                \begin{align*}
+                    \vec{a}(\vec{r},t) = \frac{D\vec{u}}{Dt} = \frac{\partial \vec{u}}{\partial t} + (\vec{u} \cdot \nabla) \vec{u}
+                \end{align*}
+                where $ ( \vec{u} \cdot \nabla) \vec{u}$ is called the \textbf{advective acceleration}
+                \begin{enumerate}
+                    \item For a \textbf{\underline{steady flow}}: $\frac{\partial \vec{u}}{\partial t} = 0$ implies:
+                        \begin{align*}
+                            \vec{a} = (\vec{u} \cdot \nabla ) \vec{u}
+                        \end{align*}
+                    \item We define \textbf{vorticity} of a flow field as:
+                        \begin{align*}
+                            \vec{\zeta} = \nabla \times \vec{u}
+                        \end{align*}
+                    The vorticity is orthogonal to the velocity field.
+                    It has physical units of $s^{-1}$.
+                    A flow with zero vorticity \textbf{i.e} $\nabla \times \vec{u} = \vec{0}$ is called an \textbf{irrotational flow}
+                    The acceleration can be rewritten as::
+                        \begin{align*}
+                            \vec{a} = \frac{\partial \vec{u}}{\partial t} + \frac{1}{2} \nabla | \vec{u} |^2 - \vec{u} \times \vec{\zeta}
+                        \end{align*}
+                \end{enumerate}  
+            \end{subequations}
+        \subsection{Pressure Force}\label{subsec:pressure-force}
+            A fluid in a volume element $dV$ exerts a force on its surrounding fluid \textbf{i.e} $d\vec{F} = p \hat{n} dS$,
+            where $p$ s the pressure at any point on the bounding surface $S$.
+            Conversely, the surrounding fluid exerts a pressure on the fluid volume:
+            \begin{subequations}
+                \begin{align*}
+                    d\vec{F} = -p \hat{n} dS
+                \end{align*}
+                The total net force exerted on the fluid volume is:
+                \begin{align*}
+                    \vec{F} = - \oiint_S p \hat{n} dS
+                \end{align*}
+                Introduce an arbitrary uniform vector field $\vec{a}$ to write the scalar product:
+                \begin{align*}
+                    - \vec{a} \cdot \oiint_S p \hat{n} dS &= - \oiint_S p \vec{a} \cdot \hat{n} dS
+                                                          &= -\iiint_V \nabla \cdot (p \vec{a}) dV
+                \end{align*}
+                where we used the Divergence Theorem.
+                The divergence and be rewritten as:
+                \begin{align*}
+                    \nabla \cdot (p \vec{a}) = \vec{a} \cdot \nabla p
+                \end{align*}
+                since $\nabla \cdot \vec{a} = 0$ as $\vec{a}$ is a constant and does not depend on space.
+                Hence, removing the scalar product with $\vec{a}$:
+                \begin{align*}
+                    \vec{F} = - \oiint_S p \hat{n} dS = - \iiint_V \nabla p dV
+                \end{align*}
+                Provided $\nabla p$ is continuous, it will be constant across an infinitesimal fluid volume $dV$.
+                The net force on this fluid element due to the surround fluid is therefore the differential form:
+                \begin{align*}
+                    - \nabla p dV
+                \end{align*}
+            \end{subequations}
+        \subsection{Euler's Equation}\label{subsec:euler's-equation}
+            We consider the external forces per unit volume $\vec{F}_{ext}$.
+            If the only external force is gravity per unit volume, $\vec{F}_{ext} = \rho \vec{g}$ where $\vec{g}$
+            is the gravitational acceleration vector field.
+            The total force exerted on a fluid element of volume $dV$:
+            \begin{subequations}
+                \begin{align*}
+                    (-\nabla p + \vec{F}_{ext}) dV
+                \end{align*}
+                Applying Newton's second Law $\vec{F} = m\vec{a}$ where $m$ is the mass and $\vec{a}$ the acceleration.
+                The total force must ths be equal to the product of the fluid mass and its acceleration:
+                \begin{align*}
+                    \rho dV = \frac{d \vec{u}}{d t}
+                \end{align*}
+                Thus,
+                \begin{align*}
+                    \rho \frac{d \vec{u}}{dt} = -\nabla p + \vec{F}_{ext}
+                \end{align*}
+                or
+                \begin{align*}
+                    \rho(\frac{\partial \vec{u}}{\partial t} + (\vec{u} \cdot \nabla)\vec{u}) = -\nabla p + \vec{F}_{ext}
+                \end{align*}
+                This is called the \textbf{Euler Equation}.
+                It is a vector equation with three components.
+                \\
+                IF we assume an incompressible fluid, the Continuity Equation becomes $\nabla \cdot \vec{u} = 0$, which allows
+                us to relate one component of the velocity as a function of the other two components.\\
+                Hence we have four scalar equations with four unknowns \textbf{i.e} $u_x, u_y, u_z$ and $p$.
+            \end{subequations}
+\end{document}
